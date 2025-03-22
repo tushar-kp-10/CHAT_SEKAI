@@ -48,7 +48,7 @@ const handleSubmit = (e) =>{
               <div
                 className="size-12 round-xl bg-primary/10 flex items-center justify-center 
                             group-hover:bg-primary/20 transition-colors">
-                              <MessageCircleHeart className="size-6 text-primary"/>
+                              <MessageSquare className="size-6 text-primary"/>
               </div>
               <h1 className="text-2xl font-bold !mt-2">Create Account</h1>
               <p className="text-base-content/68 !mb-6">Get started with your free account</p>
@@ -66,7 +66,7 @@ const handleSubmit = (e) =>{
                 </div>
                 <input
                   type="text"
-                  className={`input input-bordered w-full !pl-10`}
+                  className={`input input-bordered !border-b w-full !pl-10`}
                   placeholder="John Doe"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -83,7 +83,7 @@ const handleSubmit = (e) =>{
                 </div>
                 <input
                   type="email"
-                  className={`input input-bordered w-full !pl-10`}
+                  className={`input input-bordered !border-b w-full !pl-10`}
                   placeholder="you@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -101,7 +101,7 @@ const handleSubmit = (e) =>{
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
-                  className={`input input-bordered w-full !pl-10`}
+                  className={`input !border-b  input-bordered w-full !pl-10`}
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}

@@ -8,7 +8,7 @@ import ProfilePage from './pages/ProfilePage'
 import SettingsPage from './pages/SettingsPage'
 import { useAuthStore } from './store/useAuthStore.js'
 import {Loader} from 'lucide-react'
-import './app.css'
+// import './app.css'
 import {Toaster} from "react-hot-toast";
 
 
@@ -29,7 +29,7 @@ if(isCheckingAuth && !authUser) return (
 )
 
   return (
-    <div>
+    <div >
       {/* <div className="text-red-500">
         <button className="btn btn-primary">DaisyUI Button</button>
       </div>  
