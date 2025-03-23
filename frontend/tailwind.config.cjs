@@ -23,7 +23,6 @@ export default {
   plugins: [daisyui],
   daisyui: {
     themes: [
-      "retro",
       "light",
       "dark",
       "cupcake",

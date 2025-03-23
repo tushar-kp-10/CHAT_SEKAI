@@ -9,12 +9,14 @@ import SettingsPage from './pages/SettingsPage'
 import { useAuthStore } from './store/useAuthStore.js'
 import {Loader} from 'lucide-react'
 // import './app.css'
+import './index.css';
 import {Toaster} from "react-hot-toast";
+import { useThemeStore } from './store/useThemeStore.js'
 
 
 const App = () => {
   const {authUser,checkAuth,isCheckingAuth}=useAuthStore();
-
+  const {theme}=useThemeStore()
   useEffect(()=>{
     checkAuth();
   },[checkAuth]);
@@ -28,14 +30,17 @@ if(isCheckingAuth && !authUser) return (
   </div>
 )
 
+
+
+
   return (
-    <div >
+    <div data-theme={theme} className="!flex !flex-col !bg-base-100 !text-base-content">
       {/* <div className="text-red-500">
         <button className="btn btn-primary">DaisyUI Button</button>
       </div>  
       <button className="bg-red-500">Click Me</button> */}
       <Navbar/>
-
+      <div className="!flex-1">
       <Routes>
 
         <Route path="/" element={authUser ?<HomePage/> : <Navigate to="/login"/>}/>
@@ -45,6 +50,7 @@ if(isCheckingAuth && !authUser) return (
         <Route path="/profile" element={authUser ?<ProfilePage/> : <Navigate to="/login"/>}/>
 
       </Routes>
+      </div>
       <Toaster/>
 
     </div>
