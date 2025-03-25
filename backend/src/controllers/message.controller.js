@@ -18,7 +18,7 @@ export const getUsersForSidebar = async(req,res)=>{
 export const getMessages = async(req,res)=>{
     try{
         const {id:userToChatId}=req.params;
-        const senderId = req.user._id;
+        // const senderId = req.user._id;
         const myId = req.user._id;
 
         const messages =  await Message.find({
@@ -33,8 +33,8 @@ export const getMessages = async(req,res)=>{
                 },
             ]
         })
-
-        res.ststus(200).json(messages)
+        console.log(messages);
+        res.status(200).json(messages)
     }catch(error){
         console.log("Error in getMEssages controller:",error.message);
         res.status(500).json({error:"Internal server error"});
