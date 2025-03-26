@@ -120,7 +120,8 @@ const handleSubmit = (e) =>{
               </div>
             </div>
             
-            <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
+            <button type="submit" className="!mt-3 !mb-4 !border !border-black !shadow-md btn !btn-primary w-full
+                !hover:border-gray-700 hover:!shadow-lg !transition-all duration-300" disabled={isSigningUp}>
               {isSigningUp ? (
                 <>
                   <Loader2 className="size-5 animate-spin" />

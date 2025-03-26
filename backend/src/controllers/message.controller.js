@@ -1,6 +1,8 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
 import cloudinary from "../lib/cloudinary.js";
+import mongoose from 'mongoose';
+
 
 export const getUsersForSidebar = async(req,res)=>{
     try{
@@ -18,17 +20,18 @@ export const getUsersForSidebar = async(req,res)=>{
 export const getMessages = async(req,res)=>{
     try{
         const {id:userToChatId}=req.params;
-        // const senderId = req.user._id;
         const myId = req.user._id;
+
+
 
         const messages =  await Message.find({
             $or:[
                 {
                     senderId:myId,
-                    recieverId:userToChatId
+                    receiverId:userToChatId
                 },
                 {
-                    recieverId:myId,
+                    receiverId:myId,
                     senderId:userToChatId
                 },
             ]
@@ -36,10 +39,39 @@ export const getMessages = async(req,res)=>{
         console.log(messages);
         res.status(200).json(messages)
     }catch(error){
-        console.log("Error in getMEssages controller:",error.message);
+        console.log("Error in getMssages controller:",error.message);
         res.status(500).json({error:"Internal server error"});
     }
 }
+
+// export const getMessages = async (req, res) => {
+//     try {
+//       const { id: userToChatId } = req.params;
+//       const myId = req.user._id;
+  
+//       console.log("myId:", myId, "userToChatId:", userToChatId);
+//       if (!myId || !userToChatId) {
+//         return res.status(400).json({ error: "Invalid user IDs" });
+//       }
+  
+//       const userObjectId = new mongoose.Types.ObjectId(userToChatId);
+  
+//       const messages = await Message.find({
+//         $or: [
+//           { senderId: myId, receiverId: userObjectId },
+//           { receiverId: myId, senderId: userObjectId },
+//         ],
+//       }).sort({ createdAt: 1 });
+  
+//     //   console.log(messages);
+//       res.status(200).json(messages);
+//     } catch (error) {
+//       console.log("Error in getMessages controller:", error.message);
+//       res.status(500).json({ error: "Internal server error" });
+//     }
+//   };
+  
+
 
 
 export const sendMessage =  async(req,res)=>{
