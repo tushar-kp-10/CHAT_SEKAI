@@ -77,7 +77,7 @@ const MessageInput = () => {
         </div>
       )}
       <form onSubmit={handleSendMessage} className="flex items-center !gap-2">
-        <div className="flex-1 flex !gap-2">
+        <div className="flex-1 flex !gap-2 !border !border-zinc-600 !rounded-lg">
           <input
             type="text"
             className="w-full input !pl-2 !input-bordered !rounded-lg !input-sm sm:!input-md"
@@ -105,7 +105,7 @@ const MessageInput = () => {
         <button
           type="submit"
           className={`btn !btn-sm !btn-circle ${
-            (!text.trim() && !imagePreview) ? "!opacity-50 !cursor-not-allowed" : ""
+            (!text.trim() && !imagePreview) ? "!opacity-50 !cursor-not-allowed" : "!cursor-pointer"
           }`}
           disabled={!text.trim() && !imagePreview}
         >

@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
 import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId,io } from "../lib/socket.js";
 import mongoose from 'mongoose';
 
 
@@ -36,7 +37,7 @@ export const getMessages = async(req,res)=>{
                 },
             ]
         })
-        console.log(messages);
+        // console.log(messages);
         res.status(200).json(messages)
     }catch(error){
         console.log("Error in getMssages controller:",error.message);
@@ -94,6 +95,12 @@ export const sendMessage =  async(req,res)=>{
         });
 
         await newMessage.save();
+
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if (receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
 
 
         //todo: realtime func goes here

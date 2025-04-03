@@ -87,7 +87,7 @@ const LoginPage = () => {
             </div>
 
             <button type="submit" className="!mt-3 !mb-4 !border !border-black !shadow-md btn !btn-primary w-full
-                !hover:border-gray-700 hover:!shadow-lg !transition-all duration-300" disabled={isLoggingIn}>
+                hover:!border-gray-700 hover:!shadow-lg !transition-all duration-300" disabled={isLoggingIn}>
               {isLoggingIn ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />

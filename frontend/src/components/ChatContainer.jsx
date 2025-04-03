@@ -8,20 +8,38 @@ import MessageSkeleton from './skeletons/MessageSkeleton';
 import { formatMessageTime } from '../lib/utils';
 
 const ChatContainer = () => {
-    const {messages,getMessages,isMessagesLoading,selectedUser}=useChatStore();
+    const {messages,getMessages,isMessagesLoading,selectedUser,subscribeToMessages,
+        unsubscribeFromMessages,}=useChatStore();
     const {authUser}= useAuthStore();
     const messageEndRef = useRef(null);
+
+
+
+    // useEffect(() => {
+    //     if (messageEndRef.current && messages) {
+    //       messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    //     }
+    //   }, [messages]);
+
 
     useEffect(() => {
         messageEndRef.current?.scrollIntoView({ behavior: "auto" });
         //can use smooth for transition
       }, [messages]);
 
+
+
     useEffect(()=>{
         if (selectedUser?._id) {
             getMessages(selectedUser._id);
           }
-    },[selectedUser._id,getMessages]);
+
+        subscribeToMessages();
+
+        return () => unsubscribeFromMessages();
+    },[selectedUser._id,getMessages, subscribeToMessages, unsubscribeFromMessages]);
+
+
 
     if(isMessagesLoading) {return (
         <div className='flex-1 flex flex-col !overflow-auto'>
@@ -59,14 +77,14 @@ const ChatContainer = () => {
                 <img
                   src={message.image}
                   alt="Attachment"
-                  className="sm:!max-w-[200px] !rounded-md !mb-2"
+                  className="sm:!max-w-[200px] !rounded-md !m-1 !p-1"
                 />
               )}
               {message.text && <p>{message.text}</p>}
                     </div>
                 </div>
             ))}
-            <div ref={messageEndRef} />
+            {/* <div ref={messageEndRef} /> */}
 
         </div>
 
